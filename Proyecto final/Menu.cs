@@ -1,6 +1,7 @@
 ﻿using CurrencyConverter;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,8 @@ namespace Proyecto_final
                 Console.WriteLine("9. Agregar una transacción");
                 Console.WriteLine("10. Calcular el saldo actual de una cuenta");
                 Console.WriteLine("11. Convertir moneda");
-                Console.WriteLine("12. Salir");
+                Console.WriteLine("12. Generar reporte");
+                Console.WriteLine("13. Salir");
 
                 var option = Console.ReadLine();
                 switch (option)
@@ -66,7 +68,11 @@ namespace Proyecto_final
                         ConvertCurrency();
                         break;
                     case "12":
+                        GenerateReport();
                         return;
+                    case "13":
+                        return;
+
                     default:
                         Console.WriteLine("Opción no válida");
                         break;
@@ -75,12 +81,13 @@ namespace Proyecto_final
         }
 
         private static List<Category> _categories = new List<Category>();
+        private static string description;
 
         private static void CreateCategory()
         {
             Console.WriteLine("Ingrese el nombre de la nueva categoría:");
             var name = Console.ReadLine();
-            var newCategory = new Category { Name = name };
+            var newCategory = new Category(name, description);
             _categories.Add(newCategory);
             Console.WriteLine("La categoría ha sido creada");
         }
@@ -135,7 +142,13 @@ namespace Proyecto_final
         {
             Console.WriteLine("Ingrese el nombre de la cuenta: ");
             var name = Console.ReadLine();
-            _expenseTracker.CreateAccount(name);
+            Console.WriteLine("Ingrese el ID de la nueva cuenta: ");
+            var id = Console.ReadLine();
+            Console.WriteLine("Ingrese el email de la nueva cuenta: ");
+            var email = Console.ReadLine();
+            _expenseTracker.CreateAccount(name,id, email);
+            var newAccount = new Account(name, id, email);
+
             Console.WriteLine("Cuenta creada");
         }
 
@@ -145,7 +158,7 @@ namespace Proyecto_final
             Console.WriteLine("Cuentas: ");
             foreach (var account in accounts)
             {
-                Console.WriteLine(account.Name);
+                Console.WriteLine(account.ID + " " + account.Name + " " + account.Email);
             }
         }
 
@@ -153,24 +166,59 @@ namespace Proyecto_final
         {
             Console.WriteLine("Ingrese el nombre antiguo de la cuenta: ");
             var oldName = Console.ReadLine();
-            Console.WriteLine("Ingrese el nuevo nombre de la cuenta: ");
-            var newName = Console.ReadLine();
-            _expenseTracker.UpdateAccount(oldName, newName);
+            Console.WriteLine("Ingrese el ID antiguo de la cuenta: ");
+            var oldId = Console.ReadLine();
+            Console.WriteLine("Ingrese el email antiguo de la cuenta:");
+            var oldEmail = Console.ReadLine();
+
+            var newName = oldName;
+            var newId = oldId;
+            var newEmail = oldEmail;
+
+            Console.WriteLine("¿Desea cambiar el nombre? (s/n)");
+            var changeName = Console.ReadLine();
+            if (changeName.ToLower() == "s")
+            {
+                Console.WriteLine("Ingrese el nuevo nombre de la cuenta: ");
+                newName = Console.ReadLine();
+            }
+
+            Console.WriteLine("¿Desea cambiar el ID? (s/n)");
+            var changeId = Console.ReadLine();
+            if (changeId.ToLower() == "s")
+            {
+                Console.WriteLine("Ingrese el nuevo ID de la cuenta:");
+                newId = Console.ReadLine();
+            }
+
+            Console.WriteLine("¿Desea cambiar el email? (s/n)");
+            var changeEmail = Console.ReadLine();
+            if (changeEmail.ToLower() == "s")
+            {
+                Console.WriteLine("Ingrese el nuevo email de la cuenta:");
+                newEmail = Console.ReadLine();
+            }
+
+            _expenseTracker.UpdateAccount(oldName, newName, oldId, newId, oldEmail, newEmail);
             Console.WriteLine("Cuenta actualizada");
         }
 
+
         private static void DeleteAccount()
         {
-            Console.WriteLine("Ingrese el nombre de la cuenta a eliminar: ");
-            var name = Console.ReadLine();
-            _expenseTracker.DeleteAccount(name);
+            Console.WriteLine("Ingrese el ID o el nombre de la cuenta a eliminar: ");
+            var id = Console.ReadLine();
+            _expenseTracker.DeleteAccount(id);
             Console.WriteLine("Cuenta eliminada");
         }
+
 
         private static void AddTransaction()
         {
             Console.WriteLine("Ingrese el nombre de la cuenta: ");
             var accountName = Console.ReadLine();
+            Console.WriteLine("Ingrese el ID de la cuenta: ");
+            var accountId = Console.ReadLine();
             Console.WriteLine("Ingrese el tipo de transacción (Ingreso/Gastos): ");
             var type = Console.ReadLine();
             Console.WriteLine("Ingrese la categoría: ");
@@ -180,8 +228,8 @@ namespace Proyecto_final
             Console.WriteLine("Ingrese la descripción: ");
             var description = Console.ReadLine();
             Console.WriteLine("Ingrese la fecha (dd/mm/yyyy): ");
-            var date = DateTime.Parse(s: Console.ReadLine());
-            _expenseTracker.AddTransaction(accountName, type, category, amount, description, date);
+            var date = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            _expenseTracker.AddTransaction(accountName, accountId, type, category, amount, description, date);
             Console.WriteLine("Transacción agregada");
         }
 
@@ -189,7 +237,9 @@ namespace Proyecto_final
         {
             Console.WriteLine("Ingrese el nombre de la cuenta: ");
             var accountName = Console.ReadLine();
-            var balance = _expenseTracker.CalculateCurrentBalance(accountName);
+            Console.WriteLine("Ingrese el ID de la cuenta: ");
+            var accountId = Console.ReadLine();
+            var balance = _expenseTracker.CalculateCurrentBalance(accountName, accountId);
             Console.WriteLine("Saldo actual: " + balance);
         }
 
@@ -208,5 +258,38 @@ namespace Proyecto_final
 
 
         }
+        private static void GenerateReport()
+        {
+            Console.WriteLine("Ingrese el nombre de la categoría: ");
+            var category = Console.ReadLine();
+            Console.WriteLine("Ingrese la fecha de inicio (dd/mm/yyyy): ");
+            var startDateInput = Console.ReadLine();
+
+            if (!DateTime.TryParseExact(startDateInput, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var startDate))
+            {
+                Console.WriteLine("Formato de fecha no válido, por favor ingrese una fecha en el formato dd/mm/yyyy");
+                return;
+            }
+
+            Console.WriteLine("Ingrese la fecha final (dd/mm/yyyy): ");
+            var endDateInput = Console.ReadLine();
+
+            if (!DateTime.TryParseExact(endDateInput, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var endDate))
+            {
+                Console.WriteLine("Formato de fecha no válido, por favor ingrese una fecha en el formato dd/mm/yyyy");
+                return;
+            }
+
+            var report = _expenseTracker.GenerateExpenseReportByCategory(category, startDate, endDate);
+            Console.WriteLine("Gastos en la categoría " + category + " desde " + startDate.ToString("dd/MM/yyyy") + " hasta " + endDate.ToString("dd/MM/yyyy") + ":");
+            Console.WriteLine("Total gastado: $" + report.TotalExpense);
+            Console.WriteLine("Transacciones:");
+            foreach (var t in report.Transactions)
+            {
+                Console.WriteLine("Fecha: " + t.Date.ToString("dd/MM/yyyy") + ", Monto: $" + t.Amount + ", Descripción: " + t.Description);
+            }
+        }
+
+
     }
 }

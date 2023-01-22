@@ -4,6 +4,7 @@ using Proyecto_final;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,9 +39,9 @@ class ExpenseTracker
         _categories.Remove(name);
     }
 
-    public void CreateAccount(string name)
+    public void CreateAccount(string name,string id,string email)
     {
-        _accounts.Add(new Account { Name = name });
+        _accounts.Add(new Account(name, id, email));
     }
 
     public List<Account> ReadAccounts()
@@ -48,10 +49,28 @@ class ExpenseTracker
         return _accounts;
     }
 
-    public void UpdateAccount(string oldName, string newName)
+    public void UpdateAccount(string oldName, string newName, string oldId, string newId, string oldEmail, string newEmail)
     {
-        var account = _accounts.FirstOrDefault(a => a.Name == oldName);
-        account.Name = newName;
+        var account = _accounts.FirstOrDefault(a => a.Name == oldName && a.ID == oldId && a.Email == oldEmail);
+        if (account != null)
+        {
+            if (newName != null)
+            {
+                account.Name = newName;
+            }
+            if (newId != null)
+            {
+                account.ID = newId;
+            }
+            if (newEmail != null)
+            {
+                account.Email = newEmail;
+            }
+        }
+        else
+        {
+            Console.WriteLine("No se encontró la cuenta especificada");
+        }
     }
 
     public void DeleteAccount(string name)
@@ -78,9 +97,9 @@ class ExpenseTracker
 
 
 
-    public void AddTransaction(string accountName, string type, string category, double amount, string description, DateTime date)
+    public void AddTransaction(string accountName, string accountId, string type, string category, double amount, string description, DateTime date)
     {
-        var account = _accounts.FirstOrDefault(a => a.Name == accountName);
+        var account = _accounts.FirstOrDefault(a => a.Name == accountName && a.ID == accountId);
         if (account == null)
             throw new Exception("Cuenta no encontrada");
         var transaction = new Transaction
@@ -93,10 +112,9 @@ class ExpenseTracker
         };
         account.Transactions.Add(transaction);
     }
-
-    public double CalculateCurrentBalance(string accountName)
+    public double CalculateCurrentBalance(string accountName, string accountId)
     {
-        var account = _accounts.FirstOrDefault(a => a.Name == accountName);
+        var account = _accounts.FirstOrDefault(a => a.Name == accountName && a.ID == accountId);
         if (account == null)
             throw new Exception("Cuenta no encontrada");
         double income = 0;
@@ -114,4 +132,45 @@ class ExpenseTracker
         }
         return income - expense;
     }
+    public void GenerateReport(string accountName)
+    {
+        var account = _accounts.FirstOrDefault(a => a.Name == accountName);
+        if (account == null)
+            throw new Exception("Cuenta no encontrada");
+        double income = 0;
+        double expense = 0;
+        foreach (var t in account.Transactions)
+        {
+            if (t.Type == "Ingreso")
+            {
+                income += t.Amount;
+            }
+            else if (t.Type == "Gastos")
+            {
+                expense += t.Amount;
+            }
+        }
+        Console.WriteLine("Ingresos: " + income);
+        Console.WriteLine("Gastos: " + expense);
+        Console.WriteLine("Saldo: " + (income - expense));
+    }
+    public Report GenerateExpenseReportByCategory(string category, DateTime startDate, DateTime endDate)
+    {
+        var expenses = new List<Transaction>();
+        foreach (var account in _accounts)
+        {
+            expenses.AddRange(account.Transactions.Where(t => t.Category == category && t.Date >= startDate && t.Date <= endDate));
+        }
+
+        var report = new Report
+        {
+            Category = category,
+            StartDate = startDate,
+            EndDate = endDate,
+            TotalExpenses = expenses.Sum(t => t.Amount)
+        };
+
+        return report;
+    }
+
 }

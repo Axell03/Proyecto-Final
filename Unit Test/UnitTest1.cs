@@ -158,6 +158,6 @@ public class ExpenseTracker
 
         Console.WriteLine("Alimentos", "Gastos en alimentación");
 
-        Console.WriteLine("Categoria cambiada");
+        Console.WriteLine();
     }
 }

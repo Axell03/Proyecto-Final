@@ -8,6 +8,16 @@ namespace Proyecto_final
 {
     class Account
     {
+        public string ID { get; set; }
+        public string Email { get; set; }
+
+        public Account(string name, string id, string email)
+        {
+            Name = name;
+            ID = id;
+            Email = email;
+        }
+
         public string Name { get; set; }
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
