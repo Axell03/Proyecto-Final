@@ -1,0 +1,21 @@
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\obj\Debug\Proyecto final.csproj.AssemblyReference.cache
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\obj\Debug\Proyecto final.csproj.SuggestedBindingRedirects.cache
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\obj\Debug\Proyecto final.csproj.CoreCompileInputs.cache
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe.config
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\Proyecto final.pdb
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\AngleSharp.dll
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Buffers.dll
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Memory.dll
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\AngleSharp.xml
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Buffers.xml
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Memory.xml
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\obj\Debug\Proyecto final.csproj.CopyComplete
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\obj\Debug\Proyecto final.exe
+C:\Users\Axell\source\repos\Proyecto final\Proyecto final\obj\Debug\Proyecto final.pdb

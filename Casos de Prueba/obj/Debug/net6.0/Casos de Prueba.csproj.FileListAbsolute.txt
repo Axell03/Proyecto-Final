@@ -1,0 +1,5 @@
+C:\Users\Axell\source\repos\Proyecto final\Casos de Prueba\obj\Debug\net6.0\Casos de Prueba.csproj.AssemblyReference.cache
+C:\Users\Axell\source\repos\Proyecto final\Casos de Prueba\obj\Debug\net6.0\Casos de Prueba.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Axell\source\repos\Proyecto final\Casos de Prueba\obj\Debug\net6.0\Casos de Prueba.AssemblyInfoInputs.cache
+C:\Users\Axell\source\repos\Proyecto final\Casos de Prueba\obj\Debug\net6.0\Casos de Prueba.AssemblyInfo.cs
+C:\Users\Axell\source\repos\Proyecto final\Casos de Prueba\obj\Debug\net6.0\Casos de Prueba.csproj.CoreCompileInputs.cache
