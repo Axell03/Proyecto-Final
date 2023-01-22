@@ -64,11 +64,12 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Convertidor.cs" />
+    <Compile Include="LectorInput.cs" />
     <Compile Include="CurrencyConverter.cs" />
     <Compile Include="ExpenseTracker.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="IBuscadorTasas.cs" />
+    <Compile Include="MenuReal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="Transaction.cs" />

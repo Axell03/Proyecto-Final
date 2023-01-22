@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto_final
 {
-    class Account
+    public class Account
     {
         public string ID { get; set; }
         public string Email { get; set; }

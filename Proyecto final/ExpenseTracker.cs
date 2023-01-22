@@ -8,13 +8,16 @@ using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-class ExpenseTracker
+
+public class AccountNotFoundException : Exception { }
+
+public class ExpenseTracker
 {
     private List<string> _categories = new List<string>();
     private List<Account> _accounts = new List<Account>();
-    public BuscadorTasas _BuscadorTasas;
+    public IBuscadorTasas _BuscadorTasas;
 
-    public ExpenseTracker(BuscadorTasas BuscadorTasas)
+    public ExpenseTracker(IBuscadorTasas BuscadorTasas)
     {
         _BuscadorTasas = BuscadorTasas;
     }
@@ -49,7 +52,7 @@ class ExpenseTracker
         return _accounts;
     }
 
-    public void UpdateAccount(string oldName, string newName, string oldId, string newId, string oldEmail, string newEmail)
+    public bool UpdateAccount(string oldName, string newName, string oldId, string newId, string oldEmail, string newEmail)
     {
         var account = _accounts.FirstOrDefault(a => a.Name == oldName && a.ID == oldId && a.Email == oldEmail);
         if (account != null)
@@ -66,10 +69,11 @@ class ExpenseTracker
             {
                 account.Email = newEmail;
             }
+            return true;
         }
         else
         {
-            Console.WriteLine("No se encontró la cuenta especificada");
+            return false;
         }
     }
 
@@ -78,14 +82,10 @@ class ExpenseTracker
         _accounts.RemoveAll(a => a.Name == name);
     }
 
-    public Task<double> ConvertCurrencyAsync(double amount, string fromCurrency, string toCurrency)
-    {
-        return ConvertCurrencyAsync(amount, fromCurrency, toCurrency, _BuscadorTasas);
-    }
 
-    public async Task<double> ConvertCurrencyAsync(double amount, string fromCurrency, string toCurrency, BuscadorTasas _BuscadorTasas)
+    public async Task<double> ConvertCurrencyAsync(double amount, string fromCurrency, string toCurrency)
     {
-        var tasas = _BuscadorTasas.ObtenerTasas();
+        var tasas = await _BuscadorTasas.ObtenerTasas();
         var tasa = tasas.FirstOrDefault(t => t.MonedaOrigen == fromCurrency && t.MonedaDestino == toCurrency);
         tasa = tasas.FirstOrDefault(t => t.MonedaOrigen == fromCurrency && t.MonedaDestino == toCurrency);
         if (tasa.Valor == 0)
