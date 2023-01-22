@@ -6783,6 +6783,7 @@
       "MSTest.TestFramework >= 2.2.10",
       "Microsoft.NET.Test.Sdk >= 17.3.2",
       "Proyecto final >= 1.0.0",
+      "System.Linq >= 4.3.0",
       "coverlet.collector >= 3.1.2"
     ]
   },
@@ -6793,11 +6794,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\Casos de Prueba.csproj",
+      "projectUniqueName": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\Casos de Prueba.csproj",
       "projectName": "Casos de Prueba",
-      "projectPath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\Casos de Prueba.csproj",
+      "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\Casos de Prueba.csproj",
       "packagesPath": "C:\\Users\\Axell\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\obj\\",
+      "outputPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6818,8 +6819,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Proyecto final\\Proyecto final.csproj": {
-              "projectPath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Proyecto final\\Proyecto final.csproj"
+            "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj": {
+              "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj"
             }
           }
         }
@@ -6845,6 +6846,10 @@
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.3.2, )"
+          },
+          "System.Linq": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           },
           "coverlet.collector": {
             "target": "Package",

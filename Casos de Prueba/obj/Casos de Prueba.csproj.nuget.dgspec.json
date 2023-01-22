@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\Casos de Prueba.csproj": {}
+    "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\Casos de Prueba.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\Casos de Prueba.csproj": {
+    "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\Casos de Prueba.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\Casos de Prueba.csproj",
+        "projectUniqueName": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\Casos de Prueba.csproj",
         "projectName": "Casos de Prueba",
-        "projectPath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\Casos de Prueba.csproj",
+        "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\Casos de Prueba.csproj",
         "packagesPath": "C:\\Users\\Axell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\obj\\",
+        "outputPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Proyecto final\\Proyecto final.csproj": {
-                "projectPath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Proyecto final\\Proyecto final.csproj"
+              "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj": {
+                "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj"
               }
             }
           }
@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[17.3.2, )"
             },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[3.1.2, )"
@@ -85,11 +89,11 @@
         }
       }
     },
-    "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Proyecto final\\Proyecto final.csproj": {
+    "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Proyecto final\\Proyecto final.csproj",
+        "projectUniqueName": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj",
         "projectName": "Proyecto final",
-        "projectPath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Proyecto final\\Proyecto final.csproj",
+        "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj",
         "frameworks": {
           "net472": {
             "projectReferences": {}

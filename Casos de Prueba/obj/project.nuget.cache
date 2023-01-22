@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4R4WXY2WgC6SMhD+B0nWMKg8Kh80XWtfvNkdm1nTkzyklDudDk7i4KDlT09LNChdhpRBAjmFLCWJqf4L2q8eYA==",
+  "dgSpecHash": "Hu1Bxo61H3zfBdVqP8fBn/dAnUDJkBJVw9P3tLAKsV6AHJBkcY/Omx+Tsqir+3cbvtWhlri/qXp8rVSMKa0bYQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Axell\\source\\repos\\Proyecto final\\Casos de Prueba\\Casos de Prueba.csproj",
+  "projectFilePath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Casos de Prueba\\Casos de Prueba.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Axell\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\Axell\\.nuget\\packages\\microsoft.codecoverage\\17.3.2\\microsoft.codecoverage.17.3.2.nupkg.sha512",
