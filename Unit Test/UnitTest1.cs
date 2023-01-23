@@ -12,6 +12,25 @@ using System.Linq;
 public class ExpenseTrackerTests
 {
     [Fact]
+<<<<<<< HEAD
+=======
+    public void ConvertCurrency_ConvertirMontoDeUSDaDOP_RetornaMontoConvertido()
+    {
+        // Arrange
+        double monto = 100;
+        string monedaOrigen = "USD";
+        string monedaDestino = "DOP";
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+
+        // Act
+        var resultado = expenseTracker.ConvertCurrencyAsync(monto, monedaOrigen, monedaDestino);
+
+        // Assert
+        Assert.Equal(99999999, resultado);
+    }
+    [Fact]
+>>>>>>> 377a515fcb493f7091a18840ed10e830d081c873
     public void CreateCategory_ShouldAddNewCategoryToList()
     {
         //arrange

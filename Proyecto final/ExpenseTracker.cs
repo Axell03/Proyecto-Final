@@ -130,10 +130,6 @@ public class ExpenseTracker
         }
         return income - expense;
     }
-    public void CreateAccount(string name, string id, string email)
-    {
-        _accounts.Add(new Account(name, id, email));
-    }
     public Dictionary<string, decimal> GenerateExpenseSummaryByAccount()
     {
         var summary = new Dictionary<string, decimal>();
