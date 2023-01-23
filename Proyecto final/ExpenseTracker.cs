@@ -9,8 +9,6 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-public class AccountNotFoundException : Exception { }
-
 public class ExpenseTracker
 {
     private List<string> _categories = new List<string>();
@@ -132,45 +130,20 @@ public class ExpenseTracker
         }
         return income - expense;
     }
-    public void GenerateReport(string accountName)
+    public void CreateAccount(string name, string id, string email)
     {
-        var account = _accounts.FirstOrDefault(a => a.Name == accountName);
-        if (account == null)
-            throw new Exception("Cuenta no encontrada");
-        double income = 0;
-        double expense = 0;
-        foreach (var t in account.Transactions)
-        {
-            if (t.Type == "Ingreso")
-            {
-                income += t.Amount;
-            }
-            else if (t.Type == "Gastos")
-            {
-                expense += t.Amount;
-            }
-        }
-        Console.WriteLine("Ingresos: " + income);
-        Console.WriteLine("Gastos: " + expense);
-        Console.WriteLine("Saldo: " + (income - expense));
+        _accounts.Add(new Account(name, id, email));
     }
-    public Report GenerateExpenseReportByCategory(string category, DateTime startDate, DateTime endDate)
+    public Dictionary<string, decimal> GenerateExpenseSummaryByAccount()
     {
-        var expenses = new List<Transaction>();
+        var summary = new Dictionary<string, decimal>();
         foreach (var account in _accounts)
         {
-            expenses.AddRange(account.Transactions.Where(t => t.Category == category && t.Date >= startDate && t.Date <= endDate));
+            var accountExpenses = account.Transactions.Sum(t => t.Amount);
+            summary.Add(account.Name, (decimal)accountExpenses);
         }
-
-        var report = new Report
-        {
-            Category = category,
-            StartDate = startDate,
-            EndDate = endDate,
-            TotalExpenses = expenses.Sum(t => t.Amount)
-        };
-
-        return report;
+        return summary;
     }
+
 
 }

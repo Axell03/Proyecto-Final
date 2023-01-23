@@ -30,7 +30,7 @@ namespace Proyecto_final
                 Console.WriteLine("9. Agregar una transacción");
                 Console.WriteLine("10. Calcular el saldo actual de una cuenta");
                 Console.WriteLine("11. Convertir moneda");
-                Console.WriteLine("12. Generar reporte");
+                Console.WriteLine("12. Generar resumen de gastos por cuenta");
                 Console.WriteLine("13. Salir");
 
                 var option = Console.ReadLine();
@@ -70,8 +70,8 @@ namespace Proyecto_final
                         MenuReal.ConvertCurrency();
                         break;
                     case "12":
-                        MenuReal.GenerateReport();
-                        return;
+                        MenuReal.ShowExpenseSummaryByAccount();
+                        break;
                     case "13":
                         return;
 

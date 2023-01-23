@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CurrencyConverter;
 using System.Globalization;
+using Microsoft.Graph;
 
 
 
@@ -16,6 +17,7 @@ namespace Proyecto_final
         static ExpenseTracker _expenseTracker = new ExpenseTracker(new BuscadorTasas());
         public static List<Category> _categories = new List<Category>();
         public static string description;
+
 
         public static ILectorInput Lector { get; set; } = new LectorInput();
 
@@ -215,37 +217,15 @@ namespace Proyecto_final
 
 
         }
-        public static void GenerateReport()
+        public static void ShowExpenseSummaryByAccount()
         {
-            Console.WriteLine("Ingrese el nombre de la categoría: ");
-            var category = Lector.Leer();
-            Console.WriteLine("Ingrese la fecha de inicio (dd/mm/yyyy): ");
-            var startDateInput = Lector.Leer();
-
-            if (!DateTime.TryParseExact(startDateInput, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var startDate))
+            var summary = _expenseTracker.GenerateExpenseSummaryByAccount();
+            foreach (var item in summary)
             {
-                Console.WriteLine("Formato de fecha no válido, por favor ingrese una fecha en el formato dd/mm/yyyy");
-                return;
-            }
-
-            Console.WriteLine("Ingrese la fecha final (dd/mm/yyyy): ");
-            var endDateInput = Lector.Leer();
-
-            if (!DateTime.TryParseExact(endDateInput, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var endDate))
-            {
-                Console.WriteLine("Formato de fecha no válido, por favor ingrese una fecha en el formato dd/mm/yyyy");
-                return;
-            }
-
-            var report = _expenseTracker.GenerateExpenseReportByCategory(category, startDate, endDate);
-            Console.WriteLine("Gastos en la categoría " + category + " desde " + startDate.ToString("dd/MM/yyyy") + " hasta " + endDate.ToString("dd/MM/yyyy") + ":");
-            Console.WriteLine("Total gastado: $" + report.TotalExpense);
-            Console.WriteLine("Transacciones:");
-            foreach (var t in report.Transactions)
-            {
-                Console.WriteLine("Fecha: " + t.Date.ToString("dd/MM/yyyy") + ", Monto: $" + t.Amount + ", Descripción: " + t.Description);
+                Console.WriteLine("Cuenta: " + item.Key + ", Total gastado: $" + item.Value);
             }
         }
+
 
     }
 }

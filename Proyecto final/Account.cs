@@ -8,6 +8,8 @@ namespace Proyecto_final
 {
     public class Account
     {
+        internal decimal Transactionst;
+
         public string ID { get; set; }
         public string Email { get; set; }
 
