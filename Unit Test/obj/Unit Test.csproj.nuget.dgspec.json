@@ -1,14 +1,14 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Unit Test\\Unit Test.csproj": {}
+    "C:\\Users\\axelg\\New folder (2)\\Unit Test\\Unit Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj": {
+    "C:\\Users\\axelg\\New folder (2)\\Proyecto final\\Proyecto final.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj",
+        "projectUniqueName": "C:\\Users\\axelg\\New folder (2)\\Proyecto final\\Proyecto final.csproj",
         "projectName": "Proyecto final",
-        "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj",
+        "projectPath": "C:\\Users\\axelg\\New folder (2)\\Proyecto final\\Proyecto final.csproj",
         "frameworks": {
           "net472": {
             "projectReferences": {}
@@ -19,20 +19,20 @@
         "net472": {}
       }
     },
-    "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Unit Test\\Unit Test.csproj": {
+    "C:\\Users\\axelg\\New folder (2)\\Unit Test\\Unit Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Unit Test\\Unit Test.csproj",
+        "projectUniqueName": "C:\\Users\\axelg\\New folder (2)\\Unit Test\\Unit Test.csproj",
         "projectName": "Unit Test",
-        "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Unit Test\\Unit Test.csproj",
-        "packagesPath": "C:\\Users\\Axell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Unit Test\\obj\\",
+        "projectPath": "C:\\Users\\axelg\\New folder (2)\\Unit Test\\Unit Test.csproj",
+        "packagesPath": "C:\\Users\\axelg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\axelg\\New folder (2)\\Unit Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Axell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\axelg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -47,8 +47,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj": {
-                "projectPath": "C:\\Users\\Axell\\Desktop\\Proyecto-Final\\Proyecto final\\Proyecto final.csproj"
+              "C:\\Users\\axelg\\New folder (2)\\Proyecto final\\Proyecto final.csproj": {
+                "projectPath": "C:\\Users\\axelg\\New folder (2)\\Proyecto final\\Proyecto final.csproj"
               }
             }
           }

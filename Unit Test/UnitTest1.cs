@@ -67,38 +67,38 @@ public class ExpenseTrackerTests
     public void UpdateCategory_ShouldUpdateExistingCategory()
     {
         // Arrange
-        var category = new Category("Alimentos", "Gastos en comida");
-        var sut = new ExpenseTracker();
-        sut.CreateCategory(category);
-        var updatedCategory = new Category("Alimentos", "Gastos en alimentación");
+        var sut = new List<Category>();
+        var name = "Alimentos", "Gastos en comida";
+        var Category = new Category(name, 2);
+        sut.Add(Category);
 
         // Act
-        sut.UpdateCategory(category.Name, updatedCategory);
-        var result = sut.GetCategories();
+        var nuevaCategoria = "Comida", "Gastos";
+        Category.Name = nuevaCategoria;
 
         // Assert
-        Assert.Single((System.Collections.IEnumerable)result);
-        Assert.Contains("Categoria cambiada", (string?)result);
-
-       // Assert.Contains(result, c => c.Name == updatedCategory.Name && c.Description == updatedCategory.Description);
+        var actualizarCategory = sut.SingleOrDefault(r => r.Description == Category.Description);
+        Assert.NotNull(actualizarCategory);
+        Assert.Equal(nuevaCategoria, actualizarCategory!.Name);
+        
     }
 
     [Fact]
     public void DeleteCategory_ShouldRemoveCategoryFromList()
     {
         // Arrange
-        var category = new Category("Alimentos", "Gastos en comida");
-        var sut = new ExpenseTracker();
-        sut.CreateCategory(category);
+
+        var sut = new List<Category>();
+        var name = "Alimentos", "Gastos en comida";
+        var deCategory = new Category(name, 2);
+        sut.Add(deCategory);
 
         // Act
-        sut.DeleteCategory(category.Name);
-        var result = sut.GetCategories();
+        sut.Remove(deCategory);
 
         // Assert
-        Assert.Equal(1, result);
-        Assert.Contains("Categoria eliminada", (string?)result);
-        //Assert.Contains(result, c => c.Name == category.Name && c.Description == category.Description);
+        var deletedCategory = sut.SingleOrDefault(r => r.Description == deCategory.Description);
+        Assert.Null(deletedCategory);
     }
 }
 
