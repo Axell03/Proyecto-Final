@@ -16,14 +16,14 @@ namespace CurrencyConverter
     // esto es símplemente para agrupar los valores de cada tasa
     public struct Tasa
     {
-        public string Entidad;
+        public string entity;
         public float Valor;
         public string MonedaOrigen;
         public string MonedaDestino;
 
         public Tasa(float valor, string monedaOrigen, string monedaDestino, string entidad = "")
         {
-            Entidad = entidad;
+            entity = entidad;
             Valor = valor;
             MonedaOrigen = monedaOrigen;
             MonedaDestino = monedaDestino;
