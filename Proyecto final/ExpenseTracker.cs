@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 public class ExpenseTracker
 {
     private List<string> _categories = new List<string>();
-    private List<Account> _accounts = new List<Account>();
+    public List<Account> _accounts = new List<Account>();
     public IBuscadorTasas _BuscadorTasas;
 
     public ExpenseTracker(IBuscadorTasas BuscadorTasas)
@@ -130,16 +130,26 @@ public class ExpenseTracker
         }
         return income - expense;
     }
-    public Dictionary<string, decimal> GenerateExpenseSummaryByAccount()
+    public List<AccountSummary> GenerateExpenseSummaryByAccount()
     {
-        var summary = new Dictionary<string, decimal>();
+        var summary = new List<AccountSummary>();
+
         foreach (var account in _accounts)
         {
-            var accountExpenses = account.Transactions.Sum(t => t.Amount);
-            summary.Add(account.Name, (decimal)accountExpenses);
+            var accountExpenses = account.Transactions.Where(t => t.Type == "Ingreso").Sum(t => t.Amount);
+            var accountIncomes = account.Transactions.Where(t => t.Type == "Gastos").Sum(t => t.Amount);
+            var total = accountExpenses - accountIncomes;
+            summary.Add(new AccountSummary { AccountName = account.Name, TotalExpenses = total });
         }
         return summary;
     }
 
 
+
+}
+
+public class AccountSummary
+{
+    public string AccountName { get; internal set; }
+    public double TotalExpenses { get; internal set; }
 }

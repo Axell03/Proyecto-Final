@@ -222,10 +222,9 @@ namespace Proyecto_final
             var summary = _expenseTracker.GenerateExpenseSummaryByAccount();
             foreach (var item in summary)
             {
-                Console.WriteLine("Cuenta: " + item.Key + ", Total gastado: $" + item.Value);
+                Console.WriteLine("Cuenta: " + item.AccountName + ", Total del dinero que le queda: $" + item.TotalExpenses);
             }
         }
-
 
     }
 }
