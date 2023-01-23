@@ -11,6 +11,6 @@ namespace CurrencyConverter
 
     public interface IBuscadorTasas
     {
-         List<Tasa> ObtenerTasas();
+         Task<List<Tasa>> ObtenerTasas();
     }
 }

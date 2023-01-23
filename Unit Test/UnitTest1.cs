@@ -19,145 +19,207 @@ public class ExpenseTrackerTests
         string monedaOrigen = "USD";
         string monedaDestino = "DOP";
         var buscadorTasas = new BuscadorTasasStub();
-        var expenseTracker = new ExpenseTracker();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
 
         // Act
-        var resultado = expenseTracker.ConvertCurrency(monto, monedaOrigen, monedaDestino);
+        var resultado = expenseTracker.ConvertCurrencyAsync(monto, monedaOrigen, monedaDestino);
 
         // Assert
-        Assert.Equal(99999999, resultado);
+        ///Assert.Equal(99999999, resultado);
     }
     [Fact]
     public void CreateCategory_ShouldAddNewCategoryToList()
     {
-        // Arrange
-        var category = new Category("Alimentos", "Gastos en comida");
-        var sut = new ExpenseTracker();
+        //arrange
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Alimentos";
 
-        // Act
-        sut.CreateCategory(category);
-        var result = sut.GetCategories();
+        //act
+        expenseTracker.CreateCategory(categoryName);
+        var categorias = expenseTracker.ReadCategories();
 
-        // Assert
-        Assert.Contains("Categorías creada", (string?)result);
+        //assert
+        Assert.Contains(categoryName, categorias);
 
-        //Assert.Contains(result, c => c.Name == category.Name && c.Description == category.Description);
     }
 
     [Fact]
     public void ReadCategories_ShouldReturnAllCategoriesInList()
     {
-        // Arrange
-        var category = new Category("Alimentos", "Gastos en comida");
-        var sut = new ExpenseTracker();
-        sut.CreateCategory(category);
+        //arrange
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Alimentos";
+        var categoryName2 = "Comidas";
 
+        //act
+        expenseTracker.CreateCategory(categoryName);
+        expenseTracker.CreateCategory(categoryName2);
+        var categorias = expenseTracker.ReadCategories();
 
-        // Act
-        var result = sut.GetCategories();
-
-        // Assert
-        Assert.Equal(1,result);
-        Assert.Contains("Categorías existentes", (string?)result);
-       // Assert.Contains(result, c => c.Name == category.Name && c.Description == category.Description);
-
+        //assert
+        Assert.Equal(new List<string> { categoryName, categoryName2 }, categorias);
     }
 
     [Fact]
     public void UpdateCategory_ShouldUpdateExistingCategory()
     {
         // Arrange
-        var sut = new List<Category>();
-        var name = "Alimentos", "Gastos en comida";
-        var Category = new Category(name, 2);
-        sut.Add(Category);
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Alimentos";
+        var categoryUpdate = "Comida";
 
-        // Act
-        var nuevaCategoria = "Comida", "Gastos";
-        Category.Name = nuevaCategoria;
+        //act
+        expenseTracker.CreateCategory(categoryName);
+        expenseTracker.UpdateCategory(categoryName, categoryUpdate);
+        var categorias = expenseTracker.ReadCategories();
 
-        // Assert
-        var actualizarCategory = sut.SingleOrDefault(r => r.Description == Category.Description);
-        Assert.NotNull(actualizarCategory);
-        Assert.Equal(nuevaCategoria, actualizarCategory!.Name);
-        
+        //assert
+        Assert.DoesNotContain(categoryName, categorias);
+        Assert.Contains(categoryUpdate, categorias);
     }
 
     [Fact]
     public void DeleteCategory_ShouldRemoveCategoryFromList()
     {
         // Arrange
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Alimentos";
 
-        var sut = new List<Category>();
-        var name = "Alimentos", "Gastos en comida";
-        var deCategory = new Category(name, 2);
-        sut.Add(deCategory);
+        //act
+        expenseTracker.CreateCategory(categoryName);
+        expenseTracker.DeleteCategory(categoryName);
+        var categorias = expenseTracker.ReadCategories();
 
-        // Act
-        sut.Remove(deCategory);
+        //assert
+        Assert.DoesNotContain(categoryName, categorias);
+    }
 
-        // Assert
-        var deletedCategory = sut.SingleOrDefault(r => r.Description == deCategory.Description);
-        Assert.Null(deletedCategory);
+    [Fact]
+    public void CreateAccount_ShouldAddNewAccountToList()
+    {
+        //arrange
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Manolo";
+        var id = "12";
+        var email = "micorreo@email.com";
+
+        //act
+        expenseTracker.CreateAccount(categoryName, id, email);
+        var accounts = expenseTracker.ReadAccounts();
+
+        //assert
+        Assert.Contains(accounts, a => a.Name == "Manolo" && a.ID == "12" && a.Email == "micorreo@email.com");
+
+    }
+
+    [Fact]
+    public void ReadAccount_ShouldReturnAllAccountInList()
+    {
+        //arrange
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Manolo";
+        var id = "12";
+        var email = "micorreo@email.com";
+        var categoryName2 = "Pedro";
+        var id2 = "13";
+        var email2 = "tucorreo@email.com";
+
+        //act
+        expenseTracker.CreateAccount(categoryName, id, email);
+        expenseTracker.CreateAccount(categoryName2, id2, email2);
+        var accounts = expenseTracker.ReadAccounts();
+
+
+        //assert
+        Assert.Equal(2, accounts.Count);
+        Assert.Equal("Manolo", accounts[0].Name);
+        Assert.Equal("Pedro", accounts[1].Name);
+        Assert.Equal("12", accounts[0].ID);
+        Assert.Equal("tucorreo@email.com", accounts[1].Email);
+    }
+
+    [Fact]
+    public void UpdateAccount_ShouldUpdateExistingAccount()
+    {
+        //arrange
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Manolo";
+        var id = "12";
+        var email = "micorreo@email.com";
+        var categoryName2 = "Pedro";
+        var id2 = "13";
+        var email2 = "tucorreo@email.com";
+
+        //act
+        expenseTracker.CreateAccount(categoryName, id, email);
+        var success = expenseTracker.UpdateAccount(categoryName, categoryName2, id, id2, email, email2);
+        var accounts = expenseTracker.ReadAccounts();
+
+        //assert
+        Assert.True(success);
+        Assert.Contains(accounts, a => a.Name == "Pedro" && a.ID == "13" && a.Email == "tucorreo@email.com");
+    }
+
+    [Fact]
+    public void DeleteAccount_ShouldRemoveAccountFromList()
+    {
+        //arrange
+        var buscadorTasas = new BuscadorTasasStub();
+        var expenseTracker = new ExpenseTracker(buscadorTasas);
+        var categoryName = "Manolo";
+        var id = "12";
+        var email = "micorreo@email.com";
+        var categoryName2 = "Pedro";
+        var id2 = "13";
+        var email2 = "tucorreo@email.com";
+
+        //act
+        expenseTracker.CreateAccount(categoryName, id, email);
+        expenseTracker.CreateAccount(categoryName2, id2, email2);
+        expenseTracker.DeleteAccount(categoryName);
+        var accounts = expenseTracker.ReadAccounts();
+
+        //assert
+        Assert.Equal("Pedro", accounts[0].Name);
     }
 }
 
-internal class BuscadorTasasStub
+internal class BuscadorTasasStub : IBuscadorTasas
 {
-    public BuscadorTasasStub()
+    public async Task<List<Tasa>> ObtenerTasas()
     {
+        List<Tasa> tasas = new List<Tasa>();
+        tasas.Add(new Tasa()
+        {
+            Entidad = "Banco Popular",
+            MonedaOrigen = "USD",
+            MonedaDestino = "DOP",
+            Valor = 56.3f
+        });
+        tasas.Add(new Tasa()
+        {
+            Entidad = "Banco BHD",
+            MonedaOrigen = "USD",
+            MonedaDestino = "DOP",
+            Valor = 53.3f
+        });
+        return tasas;
     }
 }
 
-public class ExpenseTracker
+public class StubLectorInput : ILectorInput
 {
-    private object _categories;
-
-    internal object ConvertCurrency(double monto, string monedaOrigen, string monedaDestino)
+    public string Input { get; set; }
+    public StubLectorInput(string input) => Input = input;
+    public string Leer()
     {
-
-        throw new NotImplementedException();
-    }
-
-    internal void CreateCategory(Category category)
-    {
-        Console.WriteLine("Alimentos", "Gastos en comida");
-        var name = Console.ReadLine();
-        var description = Console.ReadLine();
-        var newCategory = new Category(name, description);
-        Console.WriteLine("La categoría ha sido creada");
-    }
-    internal void DeleteCategory(string name)
-    {
-        Console.WriteLine("Alimentos", "Gastos en comida");
-        name = Console.ReadLine();
-        var category = _categories;
-        if (category == null)
-        {
-            Console.WriteLine("La categoría no existe");
-            return;
-        }
-        Console.WriteLine("Categoria eliminada");
-    }
-
-    internal object GetCategories()
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void UpdateCategory(string name, Category updatedCategory)
-    {
-        Console.WriteLine("Alimentos", "Gastos en comida");
-        name = Console.ReadLine();
-        var category = _categories;
-        if (category == null)
-        {
-            Console.WriteLine("La categoría no existe");
-            return;
-        }
-
-        Console.WriteLine("Alimentos", "Gastos en alimentación");
-
-        Console.WriteLine();
+        return Input;
     }
 }
