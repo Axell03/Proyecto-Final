@@ -25,7 +25,7 @@ public class ExpenseTrackerTests
         var resultado = expenseTracker.ConvertCurrencyAsync(monto, monedaOrigen, monedaDestino);
 
         // Assert
-        ///Assert.Equal(99999999, resultado);
+        Assert.Equal(99999999, resultado);
     }
     [Fact]
     public void CreateCategory_ShouldAddNewCategoryToList()
